@@ -8,7 +8,7 @@ License text copyright (c) 2017 MariaDB Corporation Ab, All Rights Reserved.
 # Parameters
 ## Licensor:
 Taylor Satula
-Licensed Work:        MIRA
+Licensed Work:        Water Filtration Schematic for RO/DI system
 					  The Licensed Work is (c) 2025 Taylor Satula
 # Additional Use Grant:
 You may use the Licensed Work for personal, educational, evaluation, and non-commercial research purposes. Any commercial use requires a separate license from the Licensor.
@@ -34,7 +34,7 @@ This Additional Use Grant does not grant any patent rights, though such rights m
 On the second anniversary of the Licensed Work's publication date, it will automatically convert to Apache License 2.0, at which point this Additional Use Grant becomes void and all use is governed by Apache License 2.0 terms.
 
 ## Change Date:          
-Two years from the date the Licensed Work is published
+Four years from the date the Licensed Work is published
 
 ## Change License:
 Apache License, Version 2.0
