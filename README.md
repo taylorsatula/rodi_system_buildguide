@@ -6,15 +6,17 @@ This guide will walk you through building a professional-grade pure water system
 
 ### System Overview
 - **Filtration stages**: Sediment → Carbon → RO → DI
-- **Power source**: 12V battery with pump and cooling fan
+- **Power source**: 12V 200ah battery with pump and cooling fan
+- **Charge duration**: About 9.5 hours of runtime (Pump is about 16 amps) at 75% depth-of-discharge
 - **Pump specifications**: 90 PSI, 5.0 GPM regulated
-- **RO capacity**: 2600 GPD
+- **DI water output target**: 1.95gpm with a full charge on a hot day and a clean filter (measured at the end of 150ft soft 3/8 hose)
 - **Key features**: High flow rate, portable design, easy maintenance
 
 ### Required Skills
 - Basic plumbing with push-to-connect fittings
 - Simple electrical connections
 - Drilling and mounting components
+- Ability to follow directions
 
 ## Parts List
 
@@ -102,6 +104,7 @@ This guide will walk you through building a professional-grade pure water system
    - Mark mounting holes using nail polish on bushing undersides (shows exact drill locations when removed)
    - Remove pump and drill mounting holes
    - Secure pump to vertical plate with mounting screws
+   - Install slide ports in input/output holes
 
 5. **Install cooling fan**
    - Mount directly below pump
@@ -119,13 +122,14 @@ This guide will walk you through building a professional-grade pure water system
 
 7. **Carbon canister installation**
    - Add 90-degree fitting to input side
-   - Mount so output points straight up
+   - Position so output port points straight up
    - Add push-to-connect fitting to 90-degree fitting end
-   - Mount cap horizontally (may need vertical support)
+   - Mount cap with the provided white L plate (may need vertical support)
    - Add 1/2" fitting to output side
 
 8. **Carbon canister drain modification**
-   - **Caution**: This step requires careful drilling
+   - **! Caution !**: This step requires careful drilling. If you do this wrong or rush you *will* crack the housing and you'll have to order a new one. If it feels like you're putting too much force on the canister when tapping the threads or they feel like they're going in crooked: you are.
+     
    - Start with tiny pilot hole in bottom of housing
    - Gradually enlarge to 1/2"
    - Add threads using tap tool
@@ -151,6 +155,7 @@ This guide will walk you through building a professional-grade pure water system
     - Optional: Install 3rd valve for input control
 
 12. **Main flow path**
+    The whole system is 1/2" tubing and fittings from end-to-end
     - Input hose → Sediment filter input
     - Sediment output → Carbon input
     - Carbon output → Pump input (cut tubing slightly too long, don't connect yet - you'll connect after carbon flush)
@@ -158,7 +163,7 @@ This guide will walk you through building a professional-grade pure water system
     - RO permeate → DI input
     - DI output → System output
 
-13. **Waste circuit assembly**
+14. **Waste circuit assembly**
     - RO concentrate → Very short section of tubing → One-way valve (prevents any backflow into RO)
     - One-way valve → Tee fitting
     - One tee branch → Bleed valve (allows you to slam waste valve closed during normal operation while maintaining proper minimum waste flow)
@@ -171,8 +176,8 @@ This guide will walk you through building a professional-grade pure water system
 ### Phase 4: Electrical Connections
 
 14. **Fan and pump wiring**
-    - Strip and twist fan positive with pump interrupt wire
-    - Connect twisted wires to pump positive in Wago nut
+    - Strip and twist fan positive and fan interrupt wire
+    - Connect twisted wires to pump positive in Wago nut (force 'em in there)
     - Connect fan negative and pump negative in separate Wago nut
 
 15. **Battery connections**
@@ -184,18 +189,18 @@ This guide will walk you through building a professional-grade pure water system
     - Install fused battery tender leads
 
 ### Battery Charging Warning
-**Important**: When charging the system with an 8-amp charger, the battery tender leads get super hot and honestly kind of soft. Future revisions will include automatic fan activation during charging, but that hasn't been figured out yet. For now, you can either:
+**Important**: When charging the system with an 8-amp charger, the battery tender leads get super hot and honestly kind of soft. Future revisions will include automatic fan activation during charging, but I haven't figured out how to do that yet without having a seperate switch which is a non-starter. For now, you can either:
 - Accept that it hasn't caught fire yet and the leads can handle it (though they may deform over time)
-- Use a lower amperage battery tender (but with a 200Ah battery, charging will take a really long time)
+- Use a lower amperage battery tender (but with a 200Ah battery, charging will take a really really long time)
 
 ## Initial Startup and Purging
 
 ### Critical First-Run Procedure
 
 1. **Carbon filter flush** (Critical - prevents RO damage)
-   - Turn on system gently and let carbon filter housing fill up
-   - Spray output water onto ground for minimum 15 minutes (or more)
-   - When carbon filter is fresh, tons of carbon fines come out
+   - Turn on input and let carbon filter housing fill up
+   - Spray carbon output water onto ground for minimum 15 minutes (or more)
+   - When carbon filter is fresh, tons of carbon fines too small for you to see come out
    - These will clog up your RO and ruin it really quickly - this is an important step
 
 2. **System filling**
@@ -209,15 +214,16 @@ This guide will walk you through building a professional-grade pure water system
 3. **Membrane conditioning**
    - Let filled system sit 2+ hours (optimally overnight)
    - Allows RO membrane and carbon filter to swell and saturate
-   - You don't technically need to, but it'll make the RO last months if not years longer
+   - You don't technically need to wait more than an hour, but it'll make the RO last months if not years longer
 
 4. **Final purging**
    - After waiting, open input with RO waste still open
-   - Purge for 10 minutes with pump off
-   - Turn pump on and let it run wide open for another 10 minutes
+   - Purge for 5 minutes with pump off
+   - Turn pump on and let it run wide open for another 20 minutes
    - You'll know it's fully purged when:
      - Carbon canister is full of water with no air pocket
      - You don't hear the crackle of air bubbles coming out of the waste port
+     - Additionally though, you'll want to run it for a long time to wash out the preservatives that are in the RO when it is shipped dry
 
 ## Operating Procedures
 
@@ -229,7 +235,7 @@ This guide will walk you through building a professional-grade pure water system
 5. Wait a few seconds
 6. Turn pump on and begin production
 
-This stepped startup shrinks/ejects air voids and maximizes system efficiency. You would not believe the reduction in output even a little bit of compressible air will produce.
+This stepped startup shrinks/ejects air voids and maximizes system efficiency. You *would not believe* the reduction in output even a little bit of compressible air will produce. A fully bled system is a thing of beauty. The pump is nearly silent and the spray tips hiss so much water is coming out.
 
 ## Draining the System
 
@@ -238,19 +244,20 @@ This stepped startup shrinks/ejects air voids and maximizes system efficiency. Y
    - Either attach an extension to the carbon input tube or quickly swap it out with a hose that outputs lower than the rest of the system
    - Disconnect the pump input or the carbon output
    - This will rapidly drain the carbon canister
+     - Obviously the output port needs to immediately go below the canister or it'll starve near the end of the drain
 
 2. **RO membrane drain**
    - Open the waste valve with pump input disconnected
    - Turn the pump on
    - The incoming air will force the majority of water out through the RO waste
    - Let pump run for 45+ seconds until most water is expelled
-   - Note: The pump can run dry for a surprising amount of time, and this method hasn't damaged ROs so far (but your mileage may vary)
+   - Note: The pump can run dry for a surprising amount of time, and this method hasn't damaged my ROs so far (but your mileage may vary)
 
 3. **DI canister drain**
    - Much slower due to built-in one-way valve
    - Pop off both input and output ports
    - Try to get a suction going on the input side
-   - Sometimes you'll get lucky and it'll drain in 10 seconds, sometimes it takes 5 minutes
+   - Sometimes you'll get lucky and it'll drain in 10 seconds, sometimes it takes 5 minutes to blub blub blub out.
 
 ## System Performance
 
@@ -260,30 +267,36 @@ Good luck!
 
 ## Need Help?
 
-If this guide seems overwhelming, please contact me via [https://www.rocketcitywindowcleaning.com/more/contact/](https://www.rocketcitywindowcleaning.com/more/contact/) and I'll build it for you and ship the finalized product anywhere in the United States.
+If this guide seems overwhelming, please contact me via [https://www.rocketcitywindowcleaning.com/more/contact/](https://www.rocketcitywindowcleaning.com/more/contact/) and I'll build it for you and ship the finalized product anywhere in the United States. I'm also happy to answer questions. I've learned a ton about a whole host of topics during this saga. Just ask!
 
 ---
 
 ## Disclaimer
 
-This guide is purely my DIY design that I'm releasing for free with no warranty and no guarantees. I'm no expert - I'm just a guy building a system in my garage. Build and use at your own risk.
+This guide is purely my DIY design that I'm releasing for free with no warranty and no guarantees. I'm no expert - I'm just a guy building a system in my garage. Build and use at your own risk. I cannot overstate to you, dear reader, how much I'm washing my hands of this guide. My system works well and I've accepted the risk of building a DIY system but that doesn't mean yours will be identical to mine or operate under the same conditions. Be smart about it and use critical thinking skills while building.
 
 ## Maintenance Schedule
 
-- **Daily**: Check for leaks, monitor TDS
-- **Weekly**: Rinse sediment filter
-- **Monthly**: Check all connections
-- **As needed**: Replace filters based on TDS readings
+- **Daily**: Literally nothing. Flip the switch and go.
+- **Weekly**: Close RO waste and open Carbon waste to flush out accumulated biomass and fines
+- **When the sediment filter looks nasty**: Unscrew the sediment filter and pour it out. Give the paper filter a rinse for good measure.
+- **As needed**: Carbon filters are officially rated for 60,000 gallons but I don't trust like that. They're $15 so I replace them every couple months, RO should not need to be replaced for a LONG time if you flush it regularly, and DI beads need to be replaced when your TDS gets above 7-10 or when you start to see spots.
 
 ## Troubleshooting
 
-- **Low pressure**: Check for air in system, re-purge
-- **High TDS**: Replace DI resin or check RO membrane
+- **Low pressure**: Check for air in system or perhaps the battery has a low charge
+- **High TDS**: Replace DI resin or check RO membrane (RO output should be about 10ppm)
 - **Leaks**: Check all push-to-connect fittings
 
 ## Safety Notes
 
 - Always use circuit breaker for pump protection
 - Secure battery properly to prevent movement
+- Consider bolting the unit to the floor of your vehicle. In the event of a rollover that 400lb brick will absolutely kill you
 - Never run pump dry
 - Monitor TDS regularly for water quality
+- Heat shrink terminals and be smart about placing electrical connectors
+- Don't leave the system sitting out in the sun for days at a time because, at least in the American South, it'll grow green biofilm.
+
+
+## I wish you the best! If you encounter any tips and tricks please open a pull request, leave an issue on the repo, or email me directly at the link above.
