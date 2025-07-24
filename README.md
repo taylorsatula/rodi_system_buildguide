@@ -32,6 +32,7 @@ This guide will walk you through building a professional-grade pure water system
 - **DI canister**: [ProTool Empty DI Cartridge 4.5" x 20"](https://www.jracenstein.com/p/protool-di-cartridge-empty-45in-x-20in/150-0571)
 - **12V pump**: [ProTool 90PSI 5.0GPM Regulated Pump](https://www.jracenstein.com/p/protool-pump-90psi-50gpm-pump-regulated/150-0856)
 - **Pump input/output adapter**: [PushFit 1/2" to 3/4" Slide Port](https://www.jracenstein.com/p/protool-hose-barb-straight-1-2in-push-fit-to-slide-port/150-724)
+- **Pump locking clips**: [Push-to-Connect Locking Clips](https://www.mcmaster.com/51055K419))
 - **12V cooling fan**: [Coolerguys 120x38mm Waterproof IP67](https://www.amazon.com/dp/B0BKQ3R2NL/)
 - **12V battery**: [Renogy 200Ah Deep Cycle AGM](https://www.amazon.com/dp/B075RGX1WR/)
 - **Battery charger**: [Battery Tender 8 AMP 12V](https://www.amazon.com/dp/B08KVQD5LF/)
@@ -159,6 +160,7 @@ This guide will walk you through building a professional-grade pure water system
     - Input hose → Sediment filter input
     - Sediment output → Carbon input
     - Carbon output → Pump input (cut tubing slightly too long, don't connect yet - you'll connect after carbon flush)
+    - ^^ Install locking clips on both sides of the pump ports or else it'll eventually blow off and shoot 5gpm of water into your car ask me how I know
     - Pump output → RO input
     - RO permeate → DI input
     - DI output → System output
