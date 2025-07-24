@@ -271,6 +271,10 @@ Good luck!
 
 If this guide seems overwhelming, please contact me via [https://www.rocketcitywindowcleaning.com/more/contact/](https://www.rocketcitywindowcleaning.com/more/contact/) and I'll build it for you and ship the finalized product anywhere in the United States. I'm also happy to answer questions. I've learned a ton about a whole host of topics during this saga. Just ask!
 
+## Videos of The System Working incl. Component Layout
+https://youtube.com/shorts/oiQrOzdd-SY
+[RO/DI System Startup and Usage](https://youtube.com/shorts/e-OTSs5JJDI)
+[RO/DI System Walkaround](https://youtube.com/shorts/oiQrOzdd-SY)
 ---
 
 ## Disclaimer
