@@ -1,5 +1,6 @@
 import random
 import string
+import time
 from typing import Dict, Optional
 from models import GameState, Player, Question, GamePhase, JudgementResult
 from llm_judge import LLMJudge
@@ -31,7 +32,17 @@ class GameManager:
         )
         return room_code
 
-    def configure_game(self, room_code: str, num_questions: int, difficulty: Optional[str], include_final: bool) -> bool:
+    def configure_game(
+        self,
+        room_code: str,
+        num_questions: int,
+        difficulty: Optional[str],
+        include_final: bool,
+        question_display_time: int = 5,
+        answer_time: int = 30,
+        results_display_time: int = 10,
+        voting_time: int = 15
+    ) -> bool:
         """Configure game settings before starting"""
         room = self.get_room(room_code)
         if not room or room.phase != GamePhase.LOBBY:
@@ -41,7 +52,11 @@ class GameManager:
         room.config = GameConfig(
             num_questions=num_questions,
             difficulty=difficulty,
-            include_final_hard_question=include_final
+            include_final_hard_question=include_final,
+            question_display_time=question_display_time,
+            answer_time=answer_time,
+            results_display_time=results_display_time,
+            voting_time=voting_time
         )
         return True
 
@@ -92,6 +107,17 @@ class GameManager:
         """Get a room by code"""
         return self.rooms.get(room_code)
 
+    def set_phase(self, room: GameState, phase: GamePhase):
+        """Set the game phase and record the start time"""
+        room.phase = phase
+        room.phase_start_time = time.time()
+
+    def check_all_players_answered(self, room: GameState) -> bool:
+        """Check if all players have submitted their answers"""
+        if not room.players:
+            return False
+        return all(player.answer_submitted for player in room.players.values())
+
     def add_player(self, room_code: str, player_id: str, player_name: str) -> bool:
         """Add a player to a room"""
         room = self.get_room(room_code)
@@ -124,8 +150,8 @@ class GameManager:
         # Load questions based on configuration
         self.load_questions_for_game(room_code)
 
-        room.phase = GamePhase.QUESTION
         room.current_question_index = 0
+        self.set_phase(room, GamePhase.QUESTION)
         return True
 
     def start_answering(self, room_code: str) -> bool:
@@ -139,7 +165,7 @@ class GameManager:
             player.current_answer = None
             player.answer_submitted = False
 
-        room.phase = GamePhase.ANSWERING
+        self.set_phase(room, GamePhase.ANSWERING)
         return True
 
     async def judge_answers(self, room_code: str) -> bool:
@@ -148,7 +174,7 @@ class GameManager:
         if not room or room.phase != GamePhase.ANSWERING:
             return False
 
-        room.phase = GamePhase.JUDGING
+        self.set_phase(room, GamePhase.JUDGING)
         room.current_judgements = []
 
         current_question = room.questions[room.current_question_index]
@@ -179,7 +205,7 @@ class GameManager:
                     reasoning="No answer was submitted in time"
                 ))
 
-        room.phase = GamePhase.RESULTS
+        self.set_phase(room, GamePhase.RESULTS)
         return True
 
     def start_voting(self, room_code: str, judgement_index: int) -> bool:
@@ -197,7 +223,7 @@ class GameManager:
             return False
 
         room.disputed_judgement_index = judgement_index
-        room.phase = GamePhase.VOTING
+        self.set_phase(room, GamePhase.VOTING)
         return True
 
     def submit_vote(self, room_code: str, player_id: str, judgement_index: int, vote: bool) -> bool:
@@ -250,7 +276,7 @@ class GameManager:
             judgement.vote_result = False
 
         # Return to results
-        room.phase = GamePhase.RESULTS
+        self.set_phase(room, GamePhase.RESULTS)
         room.disputed_judgement_index = None
         return True
 
@@ -263,11 +289,47 @@ class GameManager:
         room.current_question_index += 1
 
         if room.current_question_index >= len(room.questions):
-            room.phase = GamePhase.FINAL_SCORES
+            self.set_phase(room, GamePhase.FINAL_SCORES)
         else:
-            room.phase = GamePhase.QUESTION
+            self.set_phase(room, GamePhase.QUESTION)
 
         return True
+
+    async def check_auto_advance(self, room_code: str) -> bool:
+        """Check if the game should auto-advance and do so if needed"""
+        room = self.get_room(room_code)
+        if not room or not room.auto_advance_enabled or room.phase_start_time is None:
+            return False
+
+        current_time = time.time()
+        elapsed = current_time - room.phase_start_time
+
+        # Handle auto-advance based on current phase
+        if room.phase == GamePhase.QUESTION:
+            # Auto-start answering after question display time
+            if elapsed >= room.config.question_display_time:
+                self.start_answering(room_code)
+                return True
+
+        elif room.phase == GamePhase.ANSWERING:
+            # Auto-judge if all players answered OR timeout reached
+            if self.check_all_players_answered(room) or elapsed >= room.config.answer_time:
+                await self.judge_answers(room_code)
+                return True
+
+        elif room.phase == GamePhase.RESULTS:
+            # Auto-advance to next question after results display time
+            if elapsed >= room.config.results_display_time:
+                self.next_question(room_code)
+                return True
+
+        elif room.phase == GamePhase.VOTING:
+            # Auto-finish voting after voting time
+            if elapsed >= room.config.voting_time:
+                self.finish_voting(room_code)
+                return True
+
+        return False
 
     def get_fallback_questions(self) -> list[Question]:
         """Return a fallback set of trivia questions when database is unavailable"""

@@ -4,11 +4,41 @@ from fastapi.responses import HTMLResponse, FileResponse
 from typing import Dict, Set
 import json
 import uuid
+import asyncio
 from game_manager import game_manager
 from models import JoinRoomRequest, SubmitAnswerRequest, HostActionRequest, ConfigureGameRequest, VoteRequest
 
 
 app = FastAPI(title="Trivia Night")
+
+# Background task for auto-advancing games
+async def auto_advance_loop():
+    """Background task that checks all games for auto-advance conditions"""
+    while True:
+        try:
+            # Check each active room
+            for room_code in list(game_manager.rooms.keys()):
+                advanced = await game_manager.check_auto_advance(room_code)
+
+                # If game advanced, broadcast updated state
+                if advanced:
+                    room = game_manager.get_room(room_code)
+                    if room:
+                        await manager.broadcast(room_code, {
+                            "type": "state_update",
+                            "state": room.model_dump(mode='json')
+                        })
+        except Exception as e:
+            print(f"Error in auto-advance loop: {e}")
+
+        # Check every second
+        await asyncio.sleep(1)
+
+
+@app.on_event("startup")
+async def startup_event():
+    """Start the auto-advance background task"""
+    asyncio.create_task(auto_advance_loop())
 
 # WebSocket connection manager
 class ConnectionManager:
@@ -130,7 +160,11 @@ async def configure_game(request: ConfigureGameRequest):
         request.room_code,
         request.num_questions,
         request.difficulty,
-        request.include_final_hard_question
+        request.include_final_hard_question,
+        request.question_display_time,
+        request.answer_time,
+        request.results_display_time,
+        request.voting_time
     )
 
     if not success:
