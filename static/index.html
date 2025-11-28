@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trivia Night - Host Display</title>
+    <link rel="stylesheet" href="/static/css/host.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Lobby Screen -->
+        <div id="lobby-screen" class="screen">
+            <div class="container">
+                <h1 class="game-title">🎯 Trivia Night</h1>
+                <div id="room-code-display" class="room-code">
+                    <div class="label">Room Code:</div>
+                    <div id="room-code" class="code">----</div>
+                </div>
+                <div class="instruction">
+                    Players: Join at <strong id="join-url"></strong>
+                </div>
+                <div id="players-waiting" class="players-list">
+                    <h2>Players in Lobby:</h2>
+                    <div id="lobby-players"></div>
+                </div>
+                <button id="start-game-btn" class="btn btn-primary">Start Game</button>
+            </div>
+        </div>
+
+        <!-- Question Display Screen -->
+        <div id="question-screen" class="screen hidden">
+            <div class="container">
+                <div class="question-header">
+                    <span id="question-number" class="question-number"></span>
+                    <span id="question-category" class="category"></span>
+                </div>
+                <div id="question-text" class="question-text"></div>
+                <button id="start-answering-btn" class="btn btn-primary">Start Answering!</button>
+            </div>
+        </div>
+
+        <!-- Answering Screen -->
+        <div id="answering-screen" class="screen hidden">
+            <div class="container">
+                <div class="question-header">
+                    <span id="answering-question-number" class="question-number"></span>
+                </div>
+                <div id="answering-question-text" class="question-text-small"></div>
+                <h2>Players Answering...</h2>
+                <div id="answering-status" class="answering-status"></div>
+                <button id="judge-answers-btn" class="btn btn-primary">Judge Answers</button>
+            </div>
+        </div>
+
+        <!-- Judging Screen -->
+        <div id="judging-screen" class="screen hidden">
+            <div class="container">
+                <h2>⚖️ Judging Answers...</h2>
+                <div class="loading-spinner"></div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen hidden">
+            <div class="container">
+                <div class="correct-answer">
+                    <div class="label">Correct Answer:</div>
+                    <div id="correct-answer-text" class="answer"></div>
+                </div>
+                <div id="judgements" class="judgements"></div>
+                <button id="next-question-btn" class="btn btn-primary">Next Question</button>
+            </div>
+        </div>
+
+        <!-- Final Scores Screen -->
+        <div id="final-screen" class="screen hidden">
+            <div class="container">
+                <h1 class="game-title">🏆 Final Scores</h1>
+                <div id="final-scores" class="final-scores"></div>
+                <button id="new-game-btn" class="btn btn-primary">New Game</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/host.js"></script>
+</body>
+</html>

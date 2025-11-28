@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trivia Night - Player</title>
+    <link rel="stylesheet" href="/static/css/player.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Join Screen -->
+        <div id="join-screen" class="screen">
+            <div class="container">
+                <h1 class="title">🎯 Trivia Night</h1>
+                <form id="join-form">
+                    <input
+                        type="text"
+                        id="room-code-input"
+                        placeholder="Room Code"
+                        maxlength="4"
+                        required
+                        autocomplete="off"
+                    />
+                    <input
+                        type="text"
+                        id="player-name-input"
+                        placeholder="Your Name"
+                        maxlength="20"
+                        required
+                        autocomplete="off"
+                    />
+                    <button type="submit" class="btn btn-primary">Join Game</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Waiting Screen -->
+        <div id="waiting-screen" class="screen hidden">
+            <div class="container">
+                <h1 class="title">✓ You're In!</h1>
+                <div class="player-info">
+                    <div class="label">Player:</div>
+                    <div id="player-name-display" class="value"></div>
+                </div>
+                <div class="status-message">Waiting for game to start...</div>
+                <div class="score-display">
+                    <div class="label">Your Score:</div>
+                    <div id="score" class="score">0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question Display -->
+        <div id="question-display-screen" class="screen hidden">
+            <div class="container">
+                <h2 class="question-header">Get Ready!</h2>
+                <div id="question-preview" class="question-preview"></div>
+                <div class="status-message">Look at the main screen</div>
+            </div>
+        </div>
+
+        <!-- Answer Input Screen -->
+        <div id="answer-screen" class="screen hidden">
+            <div class="container">
+                <div id="question-text-player" class="question-text"></div>
+                <form id="answer-form">
+                    <input
+                        type="text"
+                        id="answer-input"
+                        placeholder="Type your answer..."
+                        required
+                        autocomplete="off"
+                    />
+                    <button type="submit" class="btn btn-primary">Submit Answer</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Answer Submitted Screen -->
+        <div id="submitted-screen" class="screen hidden">
+            <div class="container">
+                <h1 class="title">✓ Answer Submitted!</h1>
+                <div class="submitted-answer">
+                    <div class="label">Your answer:</div>
+                    <div id="submitted-answer-text" class="value"></div>
+                </div>
+                <div class="status-message">Waiting for other players...</div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="player-results-screen" class="screen hidden">
+            <div class="container">
+                <div id="result-status" class="result-status"></div>
+                <div class="correct-answer-display">
+                    <div class="label">Correct Answer:</div>
+                    <div id="correct-answer-player" class="value"></div>
+                </div>
+                <div id="player-judgement" class="judgement-box"></div>
+                <div class="score-display">
+                    <div class="label">Your Score:</div>
+                    <div id="current-score" class="score">0</div>
+                </div>
+                <div class="status-message">Waiting for next question...</div>
+            </div>
+        </div>
+
+        <!-- Final Scores Screen -->
+        <div id="player-final-screen" class="screen hidden">
+            <div class="container">
+                <h1 class="title">Game Over!</h1>
+                <div id="final-placement" class="placement"></div>
+                <div class="score-display">
+                    <div class="label">Final Score:</div>
+                    <div id="final-score" class="score">0</div>
+                </div>
+                <div class="status-message">Thanks for playing!</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/player.js"></script>
+</body>
+</html>

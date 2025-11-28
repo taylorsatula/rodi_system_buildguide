@@ -1,0 +1,304 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    max-width: 1200px;
+    width: 90%;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+.screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.screen.hidden {
+    display: none;
+}
+
+.game-title {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.room-code {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.room-code .label {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.room-code .code {
+    font-size: 6rem;
+    font-weight: bold;
+    letter-spacing: 1rem;
+    font-family: 'Courier New', monospace;
+}
+
+.instruction {
+    font-size: 1.5rem;
+    margin: 2rem 0;
+    opacity: 0.9;
+}
+
+.players-list {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.players-list h2 {
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+
+#lobby-players {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.player-card {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 1rem;
+    border-radius: 10px;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.btn {
+    font-size: 1.8rem;
+    padding: 1.5rem 3rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin-top: 2rem;
+}
+
+.btn-primary {
+    background: #fff;
+    color: #667eea;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+}
+
+.question-number {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+}
+
+.category {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+}
+
+.question-text {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin: 3rem 0;
+    line-height: 1.4;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.question-text-small {
+    font-size: 2rem;
+    margin: 2rem 0;
+    opacity: 0.9;
+}
+
+.answering-status {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.player-status {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem;
+    border-radius: 10px;
+    font-size: 1.3rem;
+}
+
+.player-status.submitted {
+    background: rgba(76, 175, 80, 0.5);
+}
+
+.player-status.waiting {
+    background: rgba(255, 152, 0, 0.3);
+}
+
+.loading-spinner {
+    border: 8px solid rgba(255, 255, 255, 0.3);
+    border-top: 8px solid #fff;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 1s linear infinite;
+    margin: 2rem auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.correct-answer {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.correct-answer .label {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.correct-answer .answer {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.judgements {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.judgement-card {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-align: left;
+}
+
+.judgement-card.correct {
+    border-left: 5px solid #4caf50;
+}
+
+.judgement-card.incorrect {
+    border-left: 5px solid #f44336;
+}
+
+.judgement-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.player-name {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.points {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.player-answer {
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.reasoning {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-top: 0.5rem;
+}
+
+.final-scores {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 3rem 0;
+}
+
+.score-card {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 2rem;
+}
+
+.score-card:first-child {
+    background: rgba(255, 215, 0, 0.4);
+    border: 3px solid gold;
+    transform: scale(1.05);
+}
+
+.score-card .rank {
+    font-size: 2.5rem;
+    font-weight: bold;
+    min-width: 60px;
+}
+
+.score-card .name {
+    flex: 1;
+    text-align: left;
+    margin: 0 2rem;
+    font-weight: bold;
+}
+
+.score-card .score {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
