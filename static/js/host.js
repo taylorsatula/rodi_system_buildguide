@@ -6,7 +6,6 @@ let gameState = null;
 // Initialize on page load
 window.addEventListener('DOMContentLoaded', async () => {
     await createRoom();
-    setupEventListeners();
 });
 
 async function createRoom() {
@@ -52,45 +51,6 @@ function connectWebSocket() {
     };
 }
 
-function setupEventListeners() {
-    document.getElementById('start-game-btn').addEventListener('click', () => {
-        hostAction('start_game');
-    });
-
-    document.getElementById('start-answering-btn').addEventListener('click', () => {
-        hostAction('start_answering');
-    });
-
-    document.getElementById('judge-answers-btn').addEventListener('click', () => {
-        hostAction('judge_answers');
-    });
-
-    document.getElementById('next-question-btn').addEventListener('click', () => {
-        hostAction('next_question');
-    });
-
-    document.getElementById('new-game-btn').addEventListener('click', () => {
-        window.location.reload();
-    });
-}
-
-async function hostAction(action) {
-    try {
-        await fetch('/api/host-action', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                room_code: roomCode,
-                action: action,
-            }),
-        });
-    } catch (error) {
-        console.error('Error performing host action:', error);
-    }
-}
-
 function updateUI() {
     if (!gameState) return;
 
@@ -131,8 +91,18 @@ function showLobbyScreen() {
     const playerCount = Object.keys(gameState.players).length;
 
     if (playerCount === 0) {
-        lobbyPlayers.innerHTML = '<p style="opacity: 0.7; font-size: 1.5rem;">Waiting for players to join...</p>';
+        lobbyPlayers.innerHTML = `
+            <p style="opacity: 0.8; font-size: 2rem; margin: 2rem 0;">
+                Host is configuring the game...<br>
+                <span style="font-size: 1.5rem; opacity: 0.7;">Players will join shortly</span>
+            </p>
+        `;
     } else {
+        lobbyPlayers.innerHTML = `
+            <p style="opacity: 0.8; font-size: 1.8rem; margin-bottom: 2rem;">
+                ${playerCount} Player${playerCount !== 1 ? 's' : ''} Ready
+            </p>
+        `;
         Object.values(gameState.players).forEach(player => {
             const playerCard = document.createElement('div');
             playerCard.className = 'player-card';

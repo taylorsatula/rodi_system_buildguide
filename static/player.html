@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trivia Night - Player</title>
+    <title>🍺 Trivia Night</title>
     <link rel="stylesheet" href="/static/css/player.css">
 </head>
 <body>
@@ -11,67 +11,128 @@
         <!-- Join Screen -->
         <div id="join-screen" class="screen">
             <div class="container">
-                <h1 class="title">🎯 Trivia Night</h1>
-                <form id="join-form">
+                <h1 class="title">🍺 TRIVIA NIGHT</h1>
+                <p class="subtitle">Grab a drink and get ready!</p>
+                <form id="join-form" class="big-form">
                     <input
                         type="text"
                         id="room-code-input"
-                        placeholder="Room Code"
+                        placeholder="ROOM CODE"
                         maxlength="4"
                         required
                         autocomplete="off"
+                        class="big-input"
                     />
                     <input
                         type="text"
                         id="player-name-input"
-                        placeholder="Your Name"
+                        placeholder="YOUR NAME"
                         maxlength="20"
                         required
                         autocomplete="off"
+                        class="big-input"
                     />
-                    <button type="submit" class="btn btn-primary">Join Game</button>
+                    <button type="submit" class="big-button primary">JOIN GAME</button>
                 </form>
             </div>
         </div>
 
-        <!-- Waiting Screen -->
+        <!-- Config Screen (Host Only) -->
+        <div id="config-screen" class="screen hidden">
+            <div class="container">
+                <h1 class="title">⚙️ GAME SETUP</h1>
+                <p class="subtitle">You're the host! Configure the game</p>
+
+                <form id="config-form" class="config-form">
+                    <div class="config-group">
+                        <label>Number of Questions</label>
+                        <select id="num-questions" class="config-select">
+                            <option value="5">5 Questions (Quick)</option>
+                            <option value="8" selected>8 Questions (Classic)</option>
+                            <option value="10">10 Questions (Long)</option>
+                            <option value="15">15 Questions (Marathon)</option>
+                        </select>
+                    </div>
+
+                    <div class="config-group">
+                        <label>Difficulty</label>
+                        <select id="difficulty" class="config-select">
+                            <option value="">Mixed (Recommended)</option>
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </div>
+
+                    <div class="config-group checkbox-group">
+                        <input type="checkbox" id="final-question" checked>
+                        <label for="final-question">Include Final Hard Question (500 pts!)</label>
+                    </div>
+
+                    <div class="config-group">
+                        <label>Answer Time</label>
+                        <select id="answer-time" class="config-select">
+                            <option value="15">15 seconds (Fast!)</option>
+                            <option value="30" selected>30 seconds (Normal)</option>
+                            <option value="45">45 seconds (Relaxed)</option>
+                            <option value="60">60 seconds (Chill)</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="big-button primary">START GAME</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Waiting/Lobby Screen -->
         <div id="waiting-screen" class="screen hidden">
             <div class="container">
-                <h1 class="title">✓ You're In!</h1>
-                <div class="player-info">
-                    <div class="label">Player:</div>
-                    <div id="player-name-display" class="value"></div>
+                <h1 class="title">✓ YOU'RE IN!</h1>
+                <div class="player-badge">
+                    <div class="badge-label">Playing as</div>
+                    <div id="player-name-display" class="badge-name"></div>
                 </div>
-                <div class="status-message">Waiting for game to start...</div>
-                <div class="score-display">
-                    <div class="label">Your Score:</div>
-                    <div id="score" class="score">0</div>
+                <div class="score-card">
+                    <div class="score-label">Your Score</div>
+                    <div id="lobby-score" class="score-big">0</div>
+                </div>
+                <div class="waiting-message">
+                    <div class="pulse-dot"></div>
+                    <span id="waiting-text">Waiting for game to start...</span>
                 </div>
             </div>
         </div>
 
-        <!-- Question Display -->
+        <!-- Question Preview Screen -->
         <div id="question-display-screen" class="screen hidden">
             <div class="container">
-                <h2 class="question-header">Get Ready!</h2>
+                <div class="question-number-badge" id="q-num-preview"></div>
+                <h2 class="get-ready">GET READY!</h2>
                 <div id="question-preview" class="question-preview"></div>
-                <div class="status-message">Look at the main screen</div>
+                <div class="countdown-circle" id="preview-countdown"></div>
             </div>
         </div>
 
         <!-- Answer Input Screen -->
         <div id="answer-screen" class="screen hidden">
             <div class="container">
+                <div class="question-number-badge" id="q-num-answer"></div>
                 <div id="question-text-player" class="question-text"></div>
-                <form id="answer-form">
+                <div class="timer-bar-container">
+                    <div class="timer-bar" id="answer-timer-bar"></div>
+                    <div class="timer-text" id="answer-timer-text">30s</div>
+                </div>
+                <form id="answer-form" class="answer-form">
                     <input
                         type="text"
                         id="answer-input"
                         placeholder="Type your answer..."
                         required
                         autocomplete="off"
+                        class="big-input answer-input"
+                        autofocus
                     />
-                    <button type="submit" class="btn btn-primary">Submit Answer</button>
+                    <button type="submit" class="big-button primary">SUBMIT</button>
                 </form>
             </div>
         </div>
@@ -79,12 +140,24 @@
         <!-- Answer Submitted Screen -->
         <div id="submitted-screen" class="screen hidden">
             <div class="container">
-                <h1 class="title">✓ Answer Submitted!</h1>
-                <div class="submitted-answer">
-                    <div class="label">Your answer:</div>
-                    <div id="submitted-answer-text" class="value"></div>
+                <h1 class="title success">✓ SUBMITTED!</h1>
+                <div class="submitted-box">
+                    <div class="submitted-label">Your answer:</div>
+                    <div id="submitted-answer-text" class="submitted-answer"></div>
                 </div>
-                <div class="status-message">Waiting for other players...</div>
+                <div class="waiting-message">
+                    <div class="pulse-dot"></div>
+                    <span>Waiting for other players...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Judging Screen -->
+        <div id="judging-screen" class="screen hidden">
+            <div class="container">
+                <h1 class="title">⚖️ JUDGING...</h1>
+                <div class="spinner"></div>
+                <p class="subtitle">Claude is evaluating answers</p>
             </div>
         </div>
 
@@ -92,29 +165,60 @@
         <div id="player-results-screen" class="screen hidden">
             <div class="container">
                 <div id="result-status" class="result-status"></div>
-                <div class="correct-answer-display">
-                    <div class="label">Correct Answer:</div>
-                    <div id="correct-answer-player" class="value"></div>
+                <div id="points-earned" class="points-earned"></div>
+                <div class="answer-box">
+                    <div class="answer-label">Correct Answer:</div>
+                    <div id="correct-answer-player" class="correct-answer"></div>
                 </div>
                 <div id="player-judgement" class="judgement-box"></div>
-                <div class="score-display">
-                    <div class="label">Your Score:</div>
-                    <div id="current-score" class="score">0</div>
+                <div class="score-card">
+                    <div class="score-label">Your Score</div>
+                    <div id="current-score" class="score-big">0</div>
                 </div>
-                <div class="status-message">Waiting for next question...</div>
+                <div class="waiting-message">
+                    <div class="pulse-dot"></div>
+                    <span>Next question coming up...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Voting Screen -->
+        <div id="voting-screen" class="screen hidden">
+            <div class="container">
+                <h1 class="title">🗳️ VOTE TIME!</h1>
+                <div class="vote-question">
+                    <p class="vote-label">Was this answer close enough?</p>
+                    <div class="disputed-player" id="disputed-player-name"></div>
+                    <div class="disputed-answer" id="disputed-answer-text"></div>
+                    <div class="answer-box">
+                        <div class="answer-label">Correct Answer:</div>
+                        <div id="correct-answer-voting" class="correct-answer"></div>
+                    </div>
+                    <div class="vote-reasoning" id="vote-reasoning"></div>
+                </div>
+                <div class="timer-bar-container">
+                    <div class="timer-bar" id="vote-timer-bar"></div>
+                    <div class="timer-text" id="vote-timer-text">15s</div>
+                </div>
+                <div class="vote-buttons">
+                    <button id="vote-yes" class="big-button success">✓ CLOSE ENOUGH</button>
+                    <button id="vote-no" class="big-button danger">✗ NOPE</button>
+                </div>
+                <div id="vote-status" class="vote-status hidden"></div>
             </div>
         </div>
 
         <!-- Final Scores Screen -->
         <div id="player-final-screen" class="screen hidden">
             <div class="container">
-                <h1 class="title">Game Over!</h1>
+                <h1 class="title">🏆 GAME OVER!</h1>
                 <div id="final-placement" class="placement"></div>
-                <div class="score-display">
-                    <div class="label">Final Score:</div>
-                    <div id="final-score" class="score">0</div>
+                <div class="score-card final">
+                    <div class="score-label">Final Score</div>
+                    <div id="final-score" class="score-huge">0</div>
                 </div>
-                <div class="status-message">Thanks for playing!</div>
+                <p class="subtitle">Thanks for playing!</p>
+                <button id="new-game-btn" class="big-button primary">PLAY AGAIN</button>
             </div>
         </div>
     </div>

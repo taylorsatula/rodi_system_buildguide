@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trivia Night - Host Display</title>
+    <title>🍺 Trivia Night - Host Display</title>
     <link rel="stylesheet" href="/static/css/host.css">
 </head>
 <body>
@@ -11,19 +11,19 @@
         <!-- Lobby Screen -->
         <div id="lobby-screen" class="screen">
             <div class="container">
-                <h1 class="game-title">🎯 Trivia Night</h1>
+                <h1 class="game-title">🍺 TRIVIA NIGHT</h1>
                 <div id="room-code-display" class="room-code">
-                    <div class="label">Room Code:</div>
+                    <div class="label">ROOM CODE</div>
                     <div id="room-code" class="code">----</div>
                 </div>
                 <div class="instruction">
-                    Players: Join at <strong id="join-url"></strong>
+                    <div class="big-text">SCAN TO JOIN!</div>
+                    <div class="url-text" id="join-url"></div>
+                    <div class="helper-text">Or go to the URL and enter the room code</div>
                 </div>
                 <div id="players-waiting" class="players-list">
-                    <h2>Players in Lobby:</h2>
                     <div id="lobby-players"></div>
                 </div>
-                <button id="start-game-btn" class="btn btn-primary">Start Game</button>
             </div>
         </div>
 
@@ -35,7 +35,7 @@
                     <span id="question-category" class="category"></span>
                 </div>
                 <div id="question-text" class="question-text"></div>
-                <button id="start-answering-btn" class="btn btn-primary">Start Answering!</button>
+                <div class="status-message">Get ready to answer on your device!</div>
             </div>
         </div>
 
@@ -46,38 +46,37 @@
                     <span id="answering-question-number" class="question-number"></span>
                 </div>
                 <div id="answering-question-text" class="question-text-small"></div>
-                <h2>Players Answering...</h2>
+                <h2 class="status-title">Players Answering...</h2>
                 <div id="answering-status" class="answering-status"></div>
-                <button id="judge-answers-btn" class="btn btn-primary">Judge Answers</button>
             </div>
         </div>
 
         <!-- Judging Screen -->
         <div id="judging-screen" class="screen hidden">
             <div class="container">
-                <h2>⚖️ Judging Answers...</h2>
+                <h1 class="status-title">⚖️ JUDGING...</h1>
                 <div class="loading-spinner"></div>
+                <p class="status-message">Claude is evaluating all answers</p>
             </div>
         </div>
 
         <!-- Results Screen -->
         <div id="results-screen" class="screen hidden">
             <div class="container">
-                <div class="correct-answer">
-                    <div class="label">Correct Answer:</div>
+                <div class="correct-answer-box">
+                    <div class="label">CORRECT ANSWER</div>
                     <div id="correct-answer-text" class="answer"></div>
                 </div>
                 <div id="judgements" class="judgements"></div>
-                <button id="next-question-btn" class="btn btn-primary">Next Question</button>
             </div>
         </div>
 
         <!-- Final Scores Screen -->
         <div id="final-screen" class="screen hidden">
             <div class="container">
-                <h1 class="game-title">🏆 Final Scores</h1>
+                <h1 class="game-title">🏆 FINAL SCORES</h1>
                 <div id="final-scores" class="final-scores"></div>
-                <button id="new-game-btn" class="btn btn-primary">New Game</button>
+                <div class="status-message">Thanks for playing!</div>
             </div>
         </div>
     </div>
